@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title> Sort Numbers </title>
+		<!-- Meta Tags -->
+		<meta charset="utf-8"/>
+		
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="style.css">
+	</head>
+
+	<body>
+		<header> <!--Header -->
+			<h1 id="mainHeader">Sort Numbers</h1>
+		</header>
+		<section id="body">
+			<section id="instructions">
+				<p>Sort any amount of numbers by following these instructions:
+					<br>
+					<ol>
+						<li>Click in the text box below to begin entering the numbers.</li>
+						<li>Place a comma between each number. (ex. 41, 57, 10)</li>
+						<li>Click <b>Submit</b> when finished.</li>
+					</ol>
+					*OR<br>
+					Generate list of random numbers using the button below. Enter the amount of numbers to generate below.
+				<center><input type="text" id="randomNumber"><button id="numGenerator">Random Number Generator</button><center>
+				</p>
+			</section>
+
+			<section id="mainSection"> 
+				<section>
+					<form onsubmit="return false">
+						<input type="radio" name="sortType" id="bubbleSort">Bubble Sort
+						<input type="radio" name="sortType" id="hoareSort">Hoare Sort
+						<input type="radio" name="sortType" id="lomutoSort">Lomuto Sort
+						<br>
+						<input type="text" id="numbers">
+						<input type="submit" id="submit"> 
+					</form>
+				</section>
+				<section id="result">
+				</section>
+				<table>
+					<thead>
+						<th>Timed Results</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Bubble Sort</td>
+							<td id="bubbleTime"></td>
+						</tr>
+						<tr>
+							<td>Hoare Sort</td>
+							<td id="hoareTime"></td>
+						</tr>
+						<tr>
+							<td>Lomuto Sort</td>
+							<td id="lomutoTime"></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</section>
+		<footer>
+			<img src="numbers.gif">
+		</footer>
+		<!-- JavaScript -->
+		<script
+        	src="https://code.jquery.com/jquery-1.12.3.min.js"
+        	integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="
+        	crossorigin="anonymous">
+    	</script>
+
+    	<script type="text/javascript" src="sort.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,97 @@
+html{
+	background: url(background.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	margin: auto auto;
+	height:100%;
+	color: white;
+	font-family: tahoma;
+	font-size: 2em;
+	background-color: black;
+}
+body{
+	margin: 0 auto;
+}
+header{
+	background: url(header.jpg);
+	height: 100%;
+	top: -43px;
+	margin:0 auto;
+	width: 100%;
+	position: relative;
+
+}
+h1{
+	padding-left: 40px;
+	padding-top: 20px;
+}
+#mainSection{
+	height:100%;
+	text-align: center;
+	position: relative;
+}
+#result{
+	position: static;
+	margin: auto;
+	width:100%;
+	margin-top: 20px;
+	background-color: rgba(0, 0, 0, 0.5);
+	word-wrap: break-word;
+
+}
+#numbers{
+	background-color: rgba(50, 100, 100, 0.8);
+	color: white;
+	font-size: 20px;
+	position: relative;
+	border: solid 2px white;
+}
+#instructions:{
+	position: fixed;
+}
+#body{
+	background-color: rgba(0, 0, 0, 0.5);
+	height:100%;
+	border: solid grey 2px;
+}
+#submit{
+	height: 25px;
+	border-radius: 4px;
+	padding: 5px;
+}
+img{
+	display:none;
+}
+table{
+	text-align: left;
+}
+@media only screen and (max-width: 750px){
+	html{
+		background-color: black;
+		background-image:none;
+		font-size:1rem;
+	}
+	header{
+		text-align: center;
+		background-image: none;
+	}
+	img{
+		display:block;
+		margin: 0 auto;
+		height: 400px;
+		width: 250px;
+		background-color: white;
+		margin-top: 20px;
+	}
+	h1{
+		padding-left:0;
+	}
+	#numbers{
+		background-color: skyblue;
+		color: black;
+		font-size: 1rem;
+	}
+	#result{
+		position: relative;
+	}
+}
