@@ -10,7 +10,7 @@ $(document).ready(function() {
 			randomNumbers.push(Math.floor(Math.random() * 25000))
 		}
 		$("#numbers").val(randomNumbers)
-	}) 
+	})
 	$('#submit').click(function() {
 		var numbers = document.getElementById("numbers").value;
 		numbers = numbers.split(" ").join("");
@@ -42,20 +42,35 @@ $(document).ready(function() {
 		based on if the radio button, each named after the respective function, 
 		is selected or not.*/
 		if ($("#bubbleSort").is(":checked")) {
-			var bubbleArray = sortArray;
-			getTime(bubbleSort, "bubbleTime", bubbleArray, arrayLength);
-					bubbleArray = bubbleArray.join(", ");
-			printToPage("Ordered Results:\n" + bubbleArray)
+			var bubbleArray = sortArray.slice(0);
+			getTime(bubbleSort, "bubbleTime", sortArray, bubbleArray, arrayLength);
+			if(bubbleArray.length < 30){
+				bubbleArray = bubbleArray.join(", ");
+				printToPage("Ordered Results:\n" + bubbleArray)
+			}
+			else{
+				printToPage("Ordered Results:\n" + bubbleArray.slice(0, 5) + "..." + bubbleArray.slice((bubbleArray.length -6), (bubbleArray.length - 1)))
+			}
 		} else if ($("#hoareSort").is(":checked")) {
-			var hoareArray = sortArray;
-			getTime(hoareSort, "hoareTime", hoareArray, arrayLength);
-					hoareArray = hoareArray.join(", ");
-			printToPage("Ordered Results:\n" + hoareArray)
+			var hoareArray = sortArray.slice(0);
+			getTime(hoareSort, "hoareTime", sortArray, hoareArray, arrayLength);
+			if(hoareArray.length < 30){
+				hoareArray = hoareArray.join(", ");
+				printToPage("Ordered Results:\n" + hoareArray)
+			}
+			else{
+				printToPage("Ordered Results:\n" + hoareArray.slice(0, 5) + "..." + hoareArray.slice((hoareArray.length -6), (hoareArray.length - 1)))
+			}
 		} else if ($("#lomutoSort").is(":checked")) {
-			var lomutoArray = sortArray;
-			getTime(lomutoSort, "lomutoTime", lomutoArray, arrayLength);
-					lomutoArray = lomutoArray.join(", ");
-			printToPage("Ordered Results:\n" + lomutoArray)
+			var lomutoArray = sortArray.slice(0);
+			getTime(lomutoSort, "lomutoTime", sortArray, lomutoArray, arrayLength);
+			if(lomutoArray.length < 30){
+				lomutoArray = lomutoArray.join(", ");
+				printToPage("Ordered Results:\n" + lomutoArray)
+			}
+			else{
+				printToPage("Ordered Results:\n" + lomutoArray.slice(0, 5) + "..." + lomutoArray.slice((lomutoArray.length -6), (lomutoArray.length - 1)))
+			}
 		} else {
 			printToPage("No sort selection made. Please choose a sort type.");
 		}
@@ -69,9 +84,10 @@ $(document).ready(function() {
 			$("#result").append(message);
 		}
 	}
-	function getTime(sortType, sortResultId, array, length){
+	function getTime(sortType, sortResultId, origArray, array, length){
 		var timeArray = [];
 		for (var j = 0; j <= 4; j++) {
+			var array = origArray.slice(0);
 			if(sortType == bubbleSort){
 				var start = performance.now();
 				sortType(array,length);
@@ -83,6 +99,7 @@ $(document).ready(function() {
 				var end = performance.now();
 			}
 			var time = (end - start)
+			console.log(time)
 			timeArray.push(time)
 		}
 		timeArray.sort();
