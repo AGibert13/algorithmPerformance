@@ -42,9 +42,9 @@ $(document).ready(function() {
 		based on if the radio button, each named after the respective function, 
 		is selected or not.*/
 		if ($("#bubbleSort").is(":checked")) {
-			var bubbleArray = sortArray.slice(0);
-			getTime(bubbleSort, "bubbleTime", sortArray, bubbleArray, arrayLength);
+			var bubbleArray = getTime(bubbleSort, "bubbleTime", sortArray, arrayLength);
 			if(bubbleArray.length < 30){
+				console.log(bubbleArray)
 				bubbleArray = bubbleArray.join(", ");
 				printToPage("Ordered Results:\n" + bubbleArray)
 			}
@@ -52,8 +52,7 @@ $(document).ready(function() {
 				printToPage("Ordered Results:\n" + bubbleArray.slice(0, 5) + "..." + bubbleArray.slice((bubbleArray.length -6), (bubbleArray.length - 1)))
 			}
 		} else if ($("#hoareSort").is(":checked")) {
-			var hoareArray = sortArray.slice(0);
-			getTime(hoareSort, "hoareTime", sortArray, hoareArray, arrayLength);
+			var hoareArray = getTime(hoareSort, "hoareTime", sortArray, arrayLength);
 			if(hoareArray.length < 30){
 				hoareArray = hoareArray.join(", ");
 				printToPage("Ordered Results:\n" + hoareArray)
@@ -62,8 +61,7 @@ $(document).ready(function() {
 				printToPage("Ordered Results:\n" + hoareArray.slice(0, 5) + "..." + hoareArray.slice((hoareArray.length -6), (hoareArray.length - 1)))
 			}
 		} else if ($("#lomutoSort").is(":checked")) {
-			var lomutoArray = sortArray.slice(0);
-			getTime(lomutoSort, "lomutoTime", sortArray, lomutoArray, arrayLength);
+			var lomutoArray = getTime(lomutoSort, "lomutoTime", sortArray, arrayLength);
 			if(lomutoArray.length < 30){
 				lomutoArray = lomutoArray.join(", ");
 				printToPage("Ordered Results:\n" + lomutoArray)
@@ -84,7 +82,7 @@ $(document).ready(function() {
 			$("#result").append(message);
 		}
 	}
-	function getTime(sortType, sortResultId, origArray, array, length){
+	function getTime(sortType, sortResultId, origArray, length){
 		var timeArray = [];
 		for (var j = 0; j <= 4; j++) {
 			var array = origArray.slice(0);
@@ -99,7 +97,6 @@ $(document).ready(function() {
 				var end = performance.now();
 			}
 			var time = (end - start)
-			console.log(time)
 			timeArray.push(time)
 		}
 		timeArray.sort();
@@ -111,6 +108,7 @@ $(document).ready(function() {
 		var result = "<p class=\"time\">" + time + "<\p>"
 		$("#" + sortResultId).append(time)
 	}
+	return array
 	}
 	/*The function takes its input as the pivot in an array and the number you are
 	currently on. Instead of switching two numbers, it removes the current number
