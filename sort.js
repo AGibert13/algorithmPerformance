@@ -44,12 +44,18 @@ $(document).ready(function() {
 		if ($("#bubbleSort").is(":checked")) {
 			var bubbleArray = sortArray;
 			getTime(bubbleSort, "bubbleTime", bubbleArray, arrayLength);
+					bubbleArray = bubbleArray.join(", ");
+			printToPage("Ordered Results:\n" + bubbleArray)
 		} else if ($("#hoareSort").is(":checked")) {
 			var hoareArray = sortArray;
 			getTime(hoareSort, "hoareTime", hoareArray, arrayLength);
+					hoareArray = hoareArray.join(", ");
+			printToPage("Ordered Results:\n" + hoareArray)
 		} else if ($("#lomutoSort").is(":checked")) {
 			var lomutoArray = sortArray;
 			getTime(lomutoSort, "lomutoTime", lomutoArray, arrayLength);
+					lomutoArray = lomutoArray.join(", ");
+			printToPage("Ordered Results:\n" + lomutoArray)
 		} else {
 			printToPage("No sort selection made. Please choose a sort type.");
 		}
@@ -76,7 +82,6 @@ $(document).ready(function() {
 				sortType(array, 0, length);
 				var end = performance.now();
 			}
-			
 			var time = (end - start)
 			timeArray.push(time)
 		}
@@ -125,7 +130,7 @@ $(document).ready(function() {
 	function lomutoPartition(numbersArray, lowNum, highNum) {
 		var pivot = numbersArray[highNum];
 		var pivotIndex = lowNum;
-		for (j = lowNum; j <= highNum - 1; j++) {
+		for (var j = lowNum; j < highNum; j++) {
 			if (numbersArray[j] <= pivot) {
 				swap(numbersArray, pivotIndex, j);
 				pivotIndex += 1;
@@ -141,8 +146,7 @@ $(document).ready(function() {
 			hoareSort(numbersArray, lowNum, pivotPoint);
 			hoareSort(numbersArray, pivotPoint + 1, highNum);
 		}
-		numbersArray = numbersArray.join(", ");
-		printToPage("Ordered Results:\n" + numbersArray);
+		return numbersArray;
 	}
 	/*This recursive funciton identifies the new pivot point based on the boundary
 	created in the previous funciton, 'pivotAray'. It will continue to run until
@@ -154,8 +158,7 @@ $(document).ready(function() {
 			lomutoSort(numbersArray, lowNum, pivotPoint - 1);
 			lomutoSort(numbersArray, pivotPoint + 1, highNum);
 		}
-		numbersArray = numbersArray.join(", ");
-		printToPage("Ordered Results:\n" + numbersArray);
+		return numbersArray;
 	}
 	/* This function takes the array created from the user input to sort the
 	numbers in numerical order. While the sort is running, it is counting the
@@ -176,7 +179,6 @@ $(document).ready(function() {
 			}
 			length -= 1;
 		}
-		numbersArray = numbersArray.join(", ");
-		printToPage("Ordered Results:\n" + numbersArray);
+		return numbersArray;
 	}
 });
