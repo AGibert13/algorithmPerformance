@@ -10,7 +10,7 @@ $(document).ready(function() {
 			randomNumbers.push(Math.floor(Math.random() * 25000))
 		}
 		$("#numbers").val(randomNumbers)
-	})
+	}) 
 	$('#submit').click(function() {
 		var numbers = document.getElementById("numbers").value;
 		numbers = numbers.split(" ").join("");
