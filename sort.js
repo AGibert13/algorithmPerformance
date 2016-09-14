@@ -44,7 +44,6 @@ $(document).ready(function() {
 		if ($("#bubbleSort").is(":checked")) {
 			var bubbleArray = getTime(bubbleSort, "bubbleTime", sortArray, arrayLength);
 			if(bubbleArray.length < 30){
-				console.log(bubbleArray)
 				bubbleArray = bubbleArray.join(", ");
 				printToPage("Ordered Results:\n" + bubbleArray)
 			}
