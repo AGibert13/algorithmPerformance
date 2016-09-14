@@ -42,14 +42,35 @@ $(document).ready(function() {
 		based on if the radio button, each named after the respective function, 
 		is selected or not.*/
 		if ($("#bubbleSort").is(":checked")) {
-			var bubbleArray = sortArray;
-			getTime(bubbleSort, "bubbleTime", bubbleArray, arrayLength);
+			var bubbleArray = sortArray.slice(0);
+			getTime(bubbleSort, "bubbleTime", sortArray, bubbleArray, arrayLength);
+			if(bubbleArray.length < 30){
+				bubbleArray = bubbleArray.join(", ");
+				printToPage("Ordered Results:\n" + bubbleArray)
+			}
+			else{
+				printToPage("Ordered Results:\n" + bubbleArray.slice(0, 5) + "..." + bubbleArray.slice((bubbleArray.length -6), (bubbleArray.length - 1)))
+			}
 		} else if ($("#hoareSort").is(":checked")) {
-			var hoareArray = sortArray;
-			getTime(hoareSort, "hoareTime", hoareArray, arrayLength);
+			var hoareArray = sortArray.slice(0);
+			getTime(hoareSort, "hoareTime", sortArray, hoareArray, arrayLength);
+			if(hoareArray.length < 30){
+				hoareArray = hoareArray.join(", ");
+				printToPage("Ordered Results:\n" + hoareArray)
+			}
+			else{
+				printToPage("Ordered Results:\n" + hoareArray.slice(0, 5) + "..." + hoareArray.slice((hoareArray.length -6), (hoareArray.length - 1)))
+			}
 		} else if ($("#lomutoSort").is(":checked")) {
-			var lomutoArray = sortArray;
-			getTime(lomutoSort, "lomutoTime", lomutoArray, arrayLength);
+			var lomutoArray = sortArray.slice(0);
+			getTime(lomutoSort, "lomutoTime", sortArray, lomutoArray, arrayLength);
+			if(lomutoArray.length < 30){
+				lomutoArray = lomutoArray.join(", ");
+				printToPage("Ordered Results:\n" + lomutoArray)
+			}
+			else{
+				printToPage("Ordered Results:\n" + lomutoArray.slice(0, 5) + "..." + lomutoArray.slice((lomutoArray.length -6), (lomutoArray.length - 1)))
+			}
 		} else {
 			printToPage("No sort selection made. Please choose a sort type.");
 		}
@@ -63,9 +84,10 @@ $(document).ready(function() {
 			$("#result").append(message);
 		}
 	}
-	function getTime(sortType, sortResultId, array, length){
+	function getTime(sortType, sortResultId, origArray, array, length){
 		var timeArray = [];
 		for (var j = 0; j <= 4; j++) {
+			var array = origArray.slice(0);
 			if(sortType == bubbleSort){
 				var start = performance.now();
 				sortType(array,length);
@@ -76,8 +98,8 @@ $(document).ready(function() {
 				sortType(array, 0, length);
 				var end = performance.now();
 			}
-			
 			var time = (end - start)
+			console.log(time)
 			timeArray.push(time)
 		}
 		timeArray.sort();
@@ -117,7 +139,7 @@ $(document).ready(function() {
 			}
 			swap(array, j, k)
 		}
-	} 
+	}
 	/*This function is how the pivot points for the quick sort are made. It goes
 	through the current array of numbers, set by the low array index and high array
 	index, sorts the numbers as necessary. It will return where the pivot stopped at,
@@ -125,7 +147,7 @@ $(document).ready(function() {
 	function lomutoPartition(numbersArray, lowNum, highNum) {
 		var pivot = numbersArray[highNum];
 		var pivotIndex = lowNum;
-		for (j = lowNum; j <= highNum - 1; j++) {
+		for (var j = lowNum; j < highNum; j++) {
 			if (numbersArray[j] <= pivot) {
 				swap(numbersArray, pivotIndex, j);
 				pivotIndex += 1;
@@ -141,8 +163,7 @@ $(document).ready(function() {
 			hoareSort(numbersArray, lowNum, pivotPoint);
 			hoareSort(numbersArray, pivotPoint + 1, highNum);
 		}
-		numbersArray = numbersArray.join(", ");
-		printToPage("Ordered Results:\n" + numbersArray);
+		return numbersArray;
 	}
 	/*This recursive funciton identifies the new pivot point based on the boundary
 	created in the previous funciton, 'pivotAray'. It will continue to run until
@@ -154,8 +175,7 @@ $(document).ready(function() {
 			lomutoSort(numbersArray, lowNum, pivotPoint - 1);
 			lomutoSort(numbersArray, pivotPoint + 1, highNum);
 		}
-		numbersArray = numbersArray.join(", ");
-		printToPage("Ordered Results:\n" + numbersArray);
+		return numbersArray;
 	}
 	/* This function takes the array created from the user input to sort the
 	numbers in numerical order. While the sort is running, it is counting the
@@ -176,7 +196,6 @@ $(document).ready(function() {
 			}
 			length -= 1;
 		}
-		numbersArray = numbersArray.join(", ");
-		printToPage("Ordered Results:\n" + numbersArray);
+		return numbersArray;
 	}
 });
