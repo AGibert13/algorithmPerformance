@@ -117,7 +117,7 @@ $(document).ready(function() {
 			}
 			swap(array, j, k)
 		}
-	}
+	} 
 	/*This function is how the pivot points for the quick sort are made. It goes
 	through the current array of numbers, set by the low array index and high array
 	index, sorts the numbers as necessary. It will return where the pivot stopped at,
